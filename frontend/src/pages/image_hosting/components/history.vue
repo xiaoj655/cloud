@@ -56,7 +56,7 @@ onMounted(()=>{
             <v-img
                 v-for="item in visItems"
                 :key="item"
-                :src="`${baseURL}/${item}`"
+                :src="`/file/${item}`"
                 @click="handleClickImg(baseURL.concat('/').concat(item))"
                 rounded="sm"
                 height="200px"

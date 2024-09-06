@@ -3,7 +3,7 @@ import axios from "axios"
 
 const http = axios.create({
     timeout: 1000,
-    baseURL: 'http://139.159.135.46:5000'
+    baseURL: ''
 })
 
 http.interceptors.response.use((config) => {
