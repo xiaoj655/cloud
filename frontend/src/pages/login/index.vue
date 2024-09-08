@@ -60,17 +60,19 @@ checkLocalToken()
 </script>
 
 <template>
+<div class="absolute top-0 left-0 w-full h-full" id="bg">
+</div>
 <div class="w-[600px] absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2">
     <v-card :prepend-icon="isLogin ? 'mdi-account' : 'mdi-account-plus'" class="px-5">
         <template #title>
             <div class="flex justify-between">
-                <span>{{ isLogin ? '请登录': '注册' }}</span>
+                <span>{{ isLogin ? '登录星星网盘': '注册' }}</span>
                 <v-btn variant="plain" size="small" @click="isLogin=false" v-if="isLogin">没有账号, 立即注册</v-btn>
             </div>
         </template>
         <v-form ref="formRef">
             <v-text-field label="账户名(邮箱)" v-model="account.username" :rules="[rules.email]" validate-on="lazy input"</v-text-field>
-            <v-text-field label="密码" v-model="account.password" :rules="[rules.required, rules.length(6,20)]" validate-on="lazy input"></v-text-field>
+            <v-text-field label="密码" type="password" v-model="account.password" :rules="[rules.required, rules.length(6,20)]" validate-on="lazy input"></v-text-field>
         </v-form>
         <template #actions>
             <v-btn class="w-full" @click="handleSubmit">{{isLogin ? '登录': '注册'}}</v-btn>
@@ -78,3 +80,10 @@ checkLocalToken()
     </v-card>
 </div>
 </template>
+
+<style scoped>
+#bg {
+    background-image: url('/stars.png');
+    background-size: cover;
+}
+</style>
