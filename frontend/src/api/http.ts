@@ -1,9 +1,10 @@
 import axios from "axios"
 
+const baseURL = import.meta.env.VITE_BASE_URL
 
 const http = axios.create({
-    timeout: 1000,
-    baseURL: ''
+    timeout: 3000,
+    baseURL
 })
 
 http.interceptors.response.use((config) => {
@@ -11,7 +12,8 @@ http.interceptors.response.use((config) => {
 })
 
 http.interceptors.request.use((config)=> {
-    config.headers.Authorization = `Bearer ${localStorage.getItem('access_token')}`
+    if(!config.headers.Authorization)
+        config.headers.Authorization = `Bearer ${localStorage.getItem('access_token')}`
     return config
 })
 

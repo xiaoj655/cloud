@@ -1,8 +1,11 @@
 <script setup>
-import { ref, unref, useId } from 'vue';
+import { computed, ref, unref} from 'vue';
 import * as auth from '@/api/auth'
 import useGlobalStore from '@/stores/globalStore';
 import router from '@/router';
+import { useRoute } from 'vue-router';
+
+const route= useRoute()
 
 const formRef = ref()
 const account = ref({
@@ -35,20 +38,26 @@ async function handleSubmit() {
             localStorage.setItem('access_token', ret.data.access_token)
             router.push({name: 'image_hosting'})
         }
+        else{
+            alert('error', ret.detail || '系统错误, 请稍候重试')
+        }
     }else{
         const ret = await auth.register(username, password)
         if(ret.status_code === 200) {
-            alert('success', '注册成功, 请登录')
+            alert('success', '注册成功, 请前往邮箱确认注册!')
             isLogin.value = true
+        }else {
+            alert('error', ret.detail || '系统错误, 请稍候重试')
         }
     }
 }
 
 async function checkLocalToken(){
-    const token = localStorage.getItem('access_token')
+    const token = JSON.parse(localStorage.getItem('access_token')) || route.query.token
+    localStorage.setItem('access_token', token)
     if(!token) return
 
-    const ret = await auth.checkToken()
+    const ret = await auth.checkToken(token)
     if(ret.status_code === 200){
         router.push({name: 'image_hosting'})
     }else{

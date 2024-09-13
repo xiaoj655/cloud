@@ -9,12 +9,12 @@ const {alerts} = storeToRefs(globalStore)
 </script>
 
 <template>
-  <Layout v-if="$route.path !== '/login'">
+  <router-view v-if="$route.path === '/login'"></router-view>
+  <Layout v-else>
     <template #default>
       <router-view></router-view>
     </template>
   </Layout>
-  <router-view v-else></router-view>
   <div id="alert-box" class="fixed top-0 left-1/2 -translate-x-1/2">
     <TransitionGroup name="list">
       <v-alert v-for="item in alerts"

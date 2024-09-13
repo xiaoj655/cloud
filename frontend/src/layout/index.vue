@@ -15,9 +15,20 @@ function handleLogout() {
 
 <template>
     <v-layout>
-        <v-navigation-drawer :rail="sideBar.rail" @click="globalStore.rail = false">
+        <v-navigation-drawer :rail="sideBar.rail" @click="sideBar.rail = false">
             <v-list>
-                <v-list-item prepend-avatar="https://dummyimage.com/500x320/000/fff.png" title="jkl" subtitle="xiaoj655@gmail.com">
+                <v-list-item subtitle="欢迎回来">
+                <template #title>
+                    <span class="text-sm" title="123">
+                    xiaoj655@gmail.com
+                    </span>
+                </template>
+                <template #prepend>
+                    <v-avatar>✨</v-avatar>
+                </template>
+                <template #append>
+                    <v-btn icon="mdi-chevron-left" @click.stop="()=>sideBar.rail = !sideBar.rail" variant="text"></v-btn>
+                </template>
                 </v-list-item>
             </v-list>
             <v-divider class="border-black"></v-divider>

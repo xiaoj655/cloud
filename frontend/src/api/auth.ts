@@ -15,6 +15,10 @@ export function login(username: string, password: string): Promise<Response>{
     return http.post('/login', formData)
 }
 
-export function checkToken(){
-    return http.get('/token')
+export function checkToken(token: string){
+    return http.get('/token', {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
 }

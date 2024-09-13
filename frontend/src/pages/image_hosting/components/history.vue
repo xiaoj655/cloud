@@ -6,7 +6,7 @@ import { handleClickImg } from './utils';
 let HEIGHT = window.innerHeight - 48, WIDTH = window.innerWidth - 255, chunkSize
 const curPage = ref(0), loadingStatus = ref(false)
 const files = ref([]), visItems = ref([])
-const baseURL = 'http://hw:5000/file'
+const BASEURL = import.meta.env.VITE_BASE_URL || ''
 function loadMore() {
     render()
 }
@@ -56,8 +56,8 @@ onMounted(()=>{
             <v-img
                 v-for="item in visItems"
                 :key="item"
-                :src="`/file/${item}`"
-                @click="handleClickImg(baseURL.concat('/').concat(item))"
+                :src="`${BASEURL}/file/${item}`"
+                @click="handleClickImg(BASEURL.concat('/file/').concat(item))"
                 rounded="sm"
                 height="200px"
                 class="hover:cursor-pointer shadow">
